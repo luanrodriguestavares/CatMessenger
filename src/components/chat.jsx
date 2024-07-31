@@ -10,7 +10,8 @@ const Chat = ({ nome }) => {
   const wsRef = useRef(null);
 
   useEffect(() => {
-    const socket = new WebSocket('https://catmessengerws.onrender.com');
+    // Use wss:// for secure WebSocket connection
+    const socket = new WebSocket('wss://catmessengerws.onrender.com');
     wsRef.current = socket;
 
     socket.onopen = () => {
@@ -40,7 +41,11 @@ const Chat = ({ nome }) => {
       console.error('Erro WebSocket:', erro);
     };
 
-    return () => socket.close();
+    return () => {
+      if (wsRef.current) {
+        wsRef.current.close();
+      }
+    };
   }, []);
 
   const enviarMensagem = () => {
