@@ -8,7 +8,7 @@ function App() {
   return (
     <>
       <Navbar />
-      <div className="pt-16 md:pt-0">
+      <div className="pt-12 md:pt-0">
         <HomePage setNome={setNome} />
         <Chat nome={nome} />
       </div>
